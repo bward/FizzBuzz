@@ -1,12 +1,39 @@
-for (let i=1; i<101; i++) {
-    if (i % 3 == 0) {
-       process.stdout.write('fizz');
+for (let i=1; i<259; i++) {
+   let words = getWords(i);
+
+   if (words.includes('Bong')) {
+       words = words.filter(word => word === 'Bong' || word === 'Fezz');
+   }
+
+   if (i % 17 === 0) {
+       words.reverse();
+   }
+
+   if (words.length > 0) {
+       console.log(words.join(''));
+   } else {
+       console.log(i);
+   }
+}
+
+function getWords(number) {
+    let words = new Array();
+
+    if (number % 3 === 0) {
+        words.push('Fizz');
     }
-    if (i % 5 == 0) {
-        process.stdout.write('buzz');
+    if (number % 13 === 0) {
+        words.push('Fezz');
     }
-    if (i % 5 != 0 && i % 3 != 0) {
-        process.stdout.write(i.toString());
+    if (number % 5 === 0) {
+        words.push('Buzz');
     }
-    process.stdout.write('\n');
+    if (number % 7 === 0) {
+        words.push('Bang');
+    }
+    if (number % 11 === 0) {
+        words.push('Bong');
+    }
+
+    return words;
 }
