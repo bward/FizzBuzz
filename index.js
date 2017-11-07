@@ -1,23 +1,33 @@
-for (let i=1; i<259; i++) {
-   let words = getWords(i);
+const readline = require('readline');
 
-   if (words.includes('Bong')) {
-       words = words.filter(word => word === 'Bong' || word === 'Fezz');
-   }
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
 
-   if (i % 17 === 0) {
-       words.reverse();
-   }
+rl.question('To which number would you like to fizz and/or buzz? ', (max) => {
+    for (let i=1; i<Number(max)+1; i++) {
+        let words = getWords(i);
 
-   if (words.length > 0) {
-       console.log(words.join(''));
-   } else {
-       console.log(i);
-   }
-}
+        if (words.includes('Bong')) {
+            words = words.filter(word => word === 'Bong' || word === 'Fezz');
+        }
+
+        if (i % 17 === 0) {
+            words.reverse();
+        }
+
+        if (words.length > 0) {
+            console.log(words.join(''));
+        } else {
+            console.log(i);
+        }
+    }
+    rl.close();
+});
 
 function getWords(number) {
-    let words = new Array();
+    let words = [];
 
     if (number % 3 === 0) {
         words.push('Fizz');
